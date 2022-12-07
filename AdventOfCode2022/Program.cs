@@ -6,7 +6,7 @@ using System.Diagnostics;
 var container = new ServiceContainer();
 container.RegisterAssembly(typeof(IDay).Assembly);
 
-var day = container.GetInstance<Day5>();
+var day = container.GetInstance<Day7>();
 
 var sw1 = Stopwatch.StartNew();
 day.Part1();

@@ -13,6 +13,8 @@
     <None Remove="AoC\Input\Day3Part1.txt" />
     <None Remove="AoC\Input\Day4Part1.txt" />
     <None Remove="AoC\Input\Day5Part1.txt" />
+    <None Remove="AoC\Input\Day6Part1.txt" />
+    <None Remove="AoC\Input\Day7Part1.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +35,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="AoC\Input\Day5Part1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AoC\Input\Day6Part1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AoC\Input\Day7Part1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
