@@ -76,20 +76,26 @@ namespace AdventOfCode2022.Challenges
         public void Part2()
         {
             var maxSize = 70_000_000;
-            var spaceNeeded = 30_000_000;
+            var maxSpaceNeeded = 30_000_000;
 
             var rootSize = Root.CalculateSize();
             var spaceAlreadyFree = maxSize - rootSize;
+            var minSpaceNeeded = maxSpaceNeeded - spaceAlreadyFree;
 
             var sortedDirectories = Directories.OrderBy(i => i.CalculateSize());
-            foreach(var directory in sortedDirectories)
+            var currentClosest = 0;
+            foreach(var directory in Directories)
             {
-                if(directory.CalculateSize() > spaceNeeded - spaceAlreadyFree)
+                if (directory.CalculateSize() < minSpaceNeeded) continue;
+                if (currentClosest == 0) currentClosest = directory.CalculateSize();
+
+                if(directory.CalculateSize() - minSpaceNeeded < currentClosest - minSpaceNeeded)
                 {
-                    Console.WriteLine(directory.CalculateSize());
-                    return;
+                    currentClosest = directory.CalculateSize();
                 }
             }
+
+            Console.WriteLine(currentClosest);
         }
     }
 
