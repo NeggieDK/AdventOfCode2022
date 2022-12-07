@@ -14,7 +14,7 @@ namespace AdventOfCode2022.Challenges
             var currentDirectory = root;
             Root = root;
             var directories = new List<DirectoryNode>();
-            //directories.Add(root);
+            directories.Add(root);
             Directories = directories;
             for (int i = 0; i < lines.Length; i++)
             {
