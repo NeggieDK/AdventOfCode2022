@@ -23,7 +23,6 @@ namespace AdventOfCode2022.Challenges
                         continue;
                     }
 
-
                     var tree = lines[i][j];
                     var upMax = lines.GetRange(0, i).Select(x => x[j]).Max();
                     var downMax = lines.Skip(i + 1).Select(x => x[j]).Max();
@@ -46,7 +45,48 @@ namespace AdventOfCode2022.Challenges
 
         public void Part2()
         {
-            Console.WriteLine();
+            var lines = File.ReadAllLines("AoC/Input/Day8Part1.txt").ToList();
+            var max = 0;
+            for (var i = 1; i < lines.Count - 1; i++)
+            {
+                for (var j = 1; j < lines[i].Length - 1; j++)
+                {
+                    var tree = lines[i][j];
+                    var upMax = lines.GetRange(0, i).Select(x => x[j]).Reverse().TakeUntilIncluded(k => k >= tree).Count();
+                    var downMax = lines.Skip(i + 1).Select(x => x[j]).TakeUntilIncluded(k => k >= tree).Count();
+                    var leftMax = lines[i].ToList().GetRange(0, j).Select(i => i).Reverse().ToList().TakeUntilIncluded(k => k >= tree).Count();
+                    var rightMax = lines[i].ToList().Skip(j + 1).TakeUntilIncluded(k => k >= tree).Count();
+
+                    var score = ZeroBecomesOne(upMax) * ZeroBecomesOne(downMax) * ZeroBecomesOne(leftMax) * ZeroBecomesOne(rightMax);
+                    if(score > max) { max = score; }
+                }
+            }
+            Console.WriteLine(max);
+        }
+
+        private int ZeroBecomesOne(int number)
+        {
+            if (number == 0) return 1;
+            return number;
+        }
+    }
+
+    public static class Extension
+    {
+        public static IEnumerable<char> TakeUntilIncluded(this IEnumerable<char> list, Func<char, bool> Until)
+        {
+            var options = new List<char>();
+
+            foreach (var item in list)
+            {
+                options.Add(item);
+                if (Until.Invoke(item))
+                {
+                    return options;
+                }
+            }
+
+            return options;
         }
     }
 }
