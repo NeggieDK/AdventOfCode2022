@@ -19,32 +19,25 @@ namespace AdventOfCode2022.Challenges
         public void CalculateTailPosition(Point head)
         {
             PointsVisited.Add($"{X}:{Y}");
-            var XDifferenceAbs = Math.Abs(head.X - X);
-            var YDifferenceAbs = Math.Abs(head.Y - Y);
+            if (Math.Abs(head.X - X) < 2 && Math.Abs(head.Y - Y) < 2) return;
 
-            if (XDifferenceAbs == 0 && YDifferenceAbs == 0) return;
-            if (XDifferenceAbs == 1 && YDifferenceAbs == 1) return;
-            if (XDifferenceAbs == 0 && YDifferenceAbs == 0) return;
+            if (head.X == X)
+            {
+                if (head.Y > Y) Y++;
+                else Y--;
+            }
+            else if (head.Y == Y)
+            {
+                if (head.X > X) X++;
+                else X--;
+            }
+            else // move diagonally
+            {
+                if (head.X > X) X++;
+                else X--;
 
-            var XDifference = head.X - X;
-            var YDifference = head.Y - Y;
-            if (XDifferenceAbs == 1 && YDifferenceAbs == 2)
-            {
-                X = head.X;
-                Y += (YDifference / 2);
-            }
-            else if (XDifferenceAbs == 2 && YDifferenceAbs == 1)
-            {
-               Y = head.Y;
-               X += (XDifference / 2);
-            }
-            else if (XDifferenceAbs == 2)
-            {
-                X += (XDifference / 2);
-            }
-            else if (YDifferenceAbs == 2)
-            {
-                Y += (YDifference / 2);
+                if (head.Y > Y) Y++;
+                else Y--;
             }
             PointsVisited.Add($"{X}:{Y}");
         }
